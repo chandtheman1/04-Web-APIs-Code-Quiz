@@ -12,16 +12,27 @@
 
     <nav>
         <div>View Highscores</div>
-        <div>Time: 90</div>
+        <div>Time: <span class="timer">20</span></div>
     </nav>
 
     <main>
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <button>Start Quiz</button>
+        <button id="start-quiz">Start Quiz</button>
+        <button id="start-quiz2">Start Quiz</button>
+        <div id="question-container" class="hide">
+            <div id="question"> Question</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+
     </main>
     
-    <script src="main.js"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
     
 

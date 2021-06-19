@@ -1,0 +1,59 @@
+:root {
+    --purple: rgb(151, 78, 180);
+
+}
+
+nav {
+    display: flex;
+    flex-direction: column wrap;
+    justify-content: space-between;
+}
+
+
+nav div {
+    color: var(--purple);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+main {
+    display: block;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+p {
+    text-align: center;
+    padding: 10px;
+}
+
+button {
+
+    display: block;
+    margin: auto;
+    padding: 5px;
+    background-color: var(--purple);
+    font-weight: bold;
+
+}
+
+.btn-grid {
+    display: grid;
+    padding: 10px;
+}
+
+#question-container {
+    padding: 10px;
+}
+
+.hide {
+    display: none;
+}

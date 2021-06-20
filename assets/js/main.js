@@ -3,9 +3,12 @@ var questionContainerEl = document.querySelector("#question-container");
 var startEl = document.querySelector(".start");
 var questionEl = document.querySelector("#question");
 var answerButtonsEl = document.querySelector("#answer-buttons");
-// var startQuizbtn2 = document.querySelector("#start-quiz2");
+
+var incorrectEl = document.querySelectorAll(".incorrect");
+
 var timerEl = document.querySelector(".timer");
 
+var startQuizbtn2 = document.querySelector("#start-quiz2");
 
 var shuffledQuestions, currentQuestionIndex
 
@@ -29,6 +32,16 @@ var questionArray = [
             { text: "44", correct: false },
         ]
     },
+
+    {
+        question: "what is 5 + 5",
+        answers: [
+            { text: "10", correct: true },
+            { text: "22", correct: false },
+            { text: "33", correct: false },
+            { text: "44", correct: false },
+        ]
+    },
 ];
 
 
@@ -39,20 +52,13 @@ startQuizbtn.addEventListener('click', function() {
         currentQuestionIndex = 0;
         questionContainerEl.classList.remove('hide');
         setNextQuestion();
+
     }
      
     );
 
 // startQuizbtn2.addEventListener('click', function() { reduceTimer()});
 
-var secondsLeft = 20;
-
-var startTimer = function () {
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timerEl.textContent = secondsLeft;
-    }, 1000)
-}
 
 // var reduceTimer = function () {
 //     timerEl.textContent = secondsLeft - 10;
@@ -69,6 +75,7 @@ function nextQuestion () {
     setNextQuestion();
 }
 
+
 function showQuestion(questionArray) {
     questionEl.innerText = questionArray.question;
     questionArray.answers.forEach(answer => {
@@ -77,6 +84,9 @@ function showQuestion(questionArray) {
         button.classList.add("btn");
         if (answer.correct) {
             button.dataset.correct = answer.correct;
+        };
+        if (answer.correct == false ) {
+            button.classList.add("incorrect");
         };
         button.addEventListener("click", selectAnswer);
         answerButtonsEl.appendChild(button);
@@ -96,35 +106,66 @@ function resetState () {
 function selectAnswer (e) {
     var selectedButton = e.target;
     if (selectedButton.dataset.correct == "true") {
-        console.log("true");
+
         const correctEL = document.createElement("correct");
         correctEL.textContent = "Correct";
         answerButtonsEl.appendChild(correctEL);
-        setNextQuestion();
+        
 
     } else {
         console.log("wrong");
         const wrongEL = document.createElement("wrong");
         wrongEL.textContent = "Wrong";
         answerButtonsEl.appendChild(wrongEL);
+        secondsLeft -= 5;
+        timerEl.innerHTML = secondsLeft;
+        
+    
+
     }
 
-    // if (shuffled)
-    nextQuestion();
+   
+
+    setTimeout(nextQuestion, 500);
 
 };
 
 
-// function setStatusClass(element, correct) {
-//     clearStatusClass(element)
-//     if (correct) {
-//         element.classList.add("correct")
-//     } else {
-//         element.classList.add("wrong")
-//     }
-// }
+var secondsLeft = 50;
 
-// function clearStatusClass (element) {
-//     element.classList.remove('correct')
-//     element.classList.remove("wrong")
-// }
+var startTimer = function () {
+    setInterval(function() {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft;
+    }, 1000)
+
+
+
+}
+
+
+
+
+
+// function startTime() {
+//     var sec = 60;
+//     function startTimer(){
+//         console.log('timer suppose to go')
+//         var timer = setInterval(function(){
+//             sec--;
+//             timerEl.innerHTML='00:'+sec;
+//             if (sec < 0) {
+//                 clearInterval(timer);
+//                 alert("Time is up!")
+//             }
+//         }, 1000);
+//     }
+
+//     if (console.log("wrong")) {
+//         sec -= 5;
+//         timerEl.innerHTML='00:'+sec;
+//     }
+//     // document.getElementById('incorrect').addEventListener('click', function() {
+//     //     sec -= 5;
+//     //     timerEl.innerHTML='00:'+sec;
+// };

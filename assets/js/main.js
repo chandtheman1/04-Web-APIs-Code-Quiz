@@ -8,54 +8,33 @@ var incorrectEl = document.querySelectorAll(".incorrect");
 
 var timerEl = document.querySelector(".timer");
 
+var enterScoreEL = document.querySelector(".score");
+var finalScoreEL = document.querySelector(".final-score");
+
 var startQuizbtn2 = document.querySelector("#start-quiz2");
 
 var shuffledQuestions, currentQuestionIndex
 
-var questionArray = [
-    {
-        question: "what is 2 + 2",
-        answers: [
-            { text: "4", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
-        ]
-    },
-
-    {
-        question: "what is 4 + 4",
-        answers: [
-            { text: "8", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
-        ]
-    },
-
-    {
-        question: "what is 5 + 5",
-        answers: [
-            { text: "10", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
-        ]
-    },
-];
 
 
 startQuizbtn.addEventListener('click', function() {
-        startTimer()
+        
+        startTimer();
         startEl.classList.add('hide');
         shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
         currentQuestionIndex = 0;
         questionContainerEl.classList.remove('hide');
+
+        
         setNextQuestion();
 
+
+
+
     }
-     
     );
+
+
 
 // startQuizbtn2.addEventListener('click', function() { reduceTimer()});
 
@@ -119,53 +98,94 @@ function selectAnswer (e) {
         answerButtonsEl.appendChild(wrongEL);
         secondsLeft -= 5;
         timerEl.innerHTML = secondsLeft;
+
         
+        
+    }
     
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        setTimeout(nextQuestion, 500);
+    } else {
+        enterScore();
+        
 
     }
-
-   
-
-    setTimeout(nextQuestion, 500);
-
+    
 };
 
 
-var secondsLeft = 50;
 
-var startTimer = function () {
-    setInterval(function() {
-        secondsLeft--;
-        timerEl.textContent = secondsLeft;
-    }, 1000)
-
-
+function enterScore () {
+    questionContainerEl.classList.add("hide");
+    enterScoreEL.classList.remove("hide2");
+    startTimer(clearInterval(startTime));
 
 }
 
 
 
+var secondsLeft = 10;
+
+var startTimer = function () {
+
+   var startTime = setInterval(function() {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft;
+
+        if (secondsLeft <= 0) {
+            clearInterval(startTime);
+            enterScore();
+        }
+        
 
 
-// function startTime() {
-//     var sec = 60;
-//     function startTimer(){
-//         console.log('timer suppose to go')
-//         var timer = setInterval(function(){
-//             sec--;
-//             timerEl.innerHTML='00:'+sec;
-//             if (sec < 0) {
-//                 clearInterval(timer);
-//                 alert("Time is up!")
-//             }
-//         }, 1000);
-//     }
+    }, 1000)
+}
 
-//     if (console.log("wrong")) {
-//         sec -= 5;
-//         timerEl.innerHTML='00:'+sec;
-//     }
-//     // document.getElementById('incorrect').addEventListener('click', function() {
-//     //     sec -= 5;
-//     //     timerEl.innerHTML='00:'+sec;
-// };
+
+// var startTimer = setInterval(function() {
+//         secondsLeft--;
+//         timerEl.textContent = secondsLeft;
+
+//         if (secondsLeft === 0) {
+//             clearInterval(startTimer);
+//             enterScore();
+//         }
+        
+
+
+//     }, 1000);
+
+
+
+var questionArray = [
+    {
+        question: "what is 2 + 2",
+        answers: [
+            { text: "4", correct: true },
+            { text: "22", correct: false },
+            { text: "33", correct: false },
+            { text: "44", correct: false },
+        ]
+    },
+
+    {
+        question: "what is 4 + 4",
+        answers: [
+            { text: "8", correct: true },
+            { text: "22", correct: false },
+            { text: "33", correct: false },
+            { text: "44", correct: false },
+        ]
+    },
+
+    {
+        question: "what is 5 + 5",
+        answers: [
+            { text: "10", correct: true },
+            { text: "22", correct: false },
+            { text: "33", correct: false },
+            { text: "44", correct: false },
+        ]
+    },
+];

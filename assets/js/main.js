@@ -18,8 +18,19 @@ var questionArray = [
             { text: "33", correct: false },
             { text: "44", correct: false },
         ]
-    }
+    },
+
+    {
+        question: "what is 4 + 4",
+        answers: [
+            { text: "8", correct: true },
+            { text: "22", correct: false },
+            { text: "33", correct: false },
+            { text: "44", correct: false },
+        ]
+    },
 ];
+
 
 startQuizbtn.addEventListener('click', function() {
         startTimer()
@@ -53,6 +64,11 @@ var setNextQuestion = function() {
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+function nextQuestion () {
+    currentQuestionIndex++;
+    setNextQuestion();
+}
+
 function showQuestion(questionArray) {
     questionEl.innerText = questionArray.question;
     questionArray.answers.forEach(answer => {
@@ -74,6 +90,41 @@ function resetState () {
     }
 }
 
-function selectAnswer () {
+
+
+
+function selectAnswer (e) {
+    var selectedButton = e.target;
+    if (selectedButton.dataset.correct == "true") {
+        console.log("true");
+        const correctEL = document.createElement("correct");
+        correctEL.textContent = "Correct";
+        answerButtonsEl.appendChild(correctEL);
+        setNextQuestion();
+
+    } else {
+        console.log("wrong");
+        const wrongEL = document.createElement("wrong");
+        wrongEL.textContent = "Wrong";
+        answerButtonsEl.appendChild(wrongEL);
+    }
+
+    // if (shuffled)
+    nextQuestion();
 
 };
+
+
+// function setStatusClass(element, correct) {
+//     clearStatusClass(element)
+//     if (correct) {
+//         element.classList.add("correct")
+//     } else {
+//         element.classList.add("wrong")
+//     }
+// }
+
+// function clearStatusClass (element) {
+//     element.classList.remove('correct')
+//     element.classList.remove("wrong")
+// }

@@ -20,18 +20,6 @@ var shuffledQuestions, currentQuestionIndex
 
 
 
-startQuizbtn.addEventListener('click', function() {
-
-        startTimer();
-        startEl.classList.add('hide');
-        shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
-        currentQuestionIndex = 0;
-        questionContainerEl.classList.remove('hide');
-
-        
-        setNextQuestion();
-    }
-    );
 
 
 
@@ -121,14 +109,70 @@ function enterScore () {
 
     questionContainerEl.classList.add("hide");
     enterScoreEL.classList.remove("hide2");
-    clearInterval(window.startTime);
-
+    clearInterval(startTime);
+ 
     if (secondsLeft < 0) {
         secondsLeft = 0
     }
     finalScoreEL.textContent = "Your final score is " + secondsLeft;
     
 }
+
+var startTime;
+
+var secondsLeft = 30;
+
+
+var startTimer = function () {
+
+    startTime = setInterval(function() {
+         secondsLeft--;
+         timerEl.textContent = secondsLeft;
+ 
+         if (secondsLeft <= 0 ) {
+             clearInterval(startTime);
+             enterScore();
+         }  
+ 
+ 
+     }, 1000)
+ }
+ 
+
+
+// startTime = setInterval(function() {
+//     secondsLeft--;
+//     timerEl.textContent = secondsLeft;
+    
+//     if (secondsLeft <= 0) {
+//         clearInterval(startTime);
+//         enterScore();
+//     }  
+// }, 1000);
+
+
+
+
+
+startQuizbtn.addEventListener('click', function() {
+
+  
+
+    startTimer();
+    startEl.classList.add('hide');
+    shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
+    currentQuestionIndex = 0;
+    questionContainerEl.classList.remove('hide');
+
+    
+    setNextQuestion();
+
+
+}
+);
+
+
+
 
 var highScores = [];
 
@@ -157,37 +201,6 @@ submitBtn.addEventListener("click", function () {
     window.location.replace("./highscores.html")
 
 });
-
-var secondsLeft = 30;
-
-
-// var startTimer = function () {
-
-//    var startTime = setInterval(function() {
-//         secondsLeft--;
-//         timerEl.textContent = secondsLeft;
-
-//         if (secondsLeft <= 0) {
-//             clearInterval(startTime);
-//             enterScore();
-//         }  
-
-
-//     }, 1000)
-// }
-var startTimer = function () {
-
-    var startTime = setInterval(function() {
-        secondsLeft--;
-        timerEl.textContent = secondsLeft;
-    
-        if (secondsLeft <= 0) {
-            clearInterval(startTime);
-            enterScore();
-        }  
-    }, 1000);
-}
-
 
 
 

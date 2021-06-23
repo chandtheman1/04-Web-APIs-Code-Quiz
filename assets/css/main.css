@@ -1,5 +1,6 @@
 :root {
     --purple: rgb(151, 78, 180);
+    --lightPurple: rgb(213, 166, 235);
 
 }
 
@@ -64,14 +65,18 @@ button {
 
 table {
     display: flex;
+
     justify-content: center;
     align-content: center;
+ 
+    border: 1px solid #dddddd;
+
+    margin: 10px;
 }
 
-tr {
-    margin: 5px;
-}
 
-td {
-    margin: 5px;
+
+
+tr:nth-child(odd) {
+    background-color: var(--lightPurple);
 }

@@ -22,7 +22,7 @@ var shuffledQuestions, currentQuestionIndex
 
 startQuizbtn.addEventListener('click', function() {
 
-        startTime;
+        startTimer();
         startEl.classList.add('hide');
         shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
         currentQuestionIndex = 0;
@@ -30,10 +30,6 @@ startQuizbtn.addEventListener('click', function() {
 
         
         setNextQuestion();
-
-
-
-
     }
     );
 
@@ -134,18 +130,32 @@ function enterScore () {
     
 }
 
-var highScores = [
+var highScores = [];
 
-];
+function getHighScores () {
+    var getPastScores = localStorage.getItem("highscore");
 
-submitBtn.addEventListener("click", ()=> {
+    if (getPastScores === null) {
+        highScores = [];
+    } else {
+        highScores = JSON.parse(localStorage.getItem("highscore"));
+    };
+};
+
+
+
+submitBtn.addEventListener("click", function () {
 
     var userInput = nameInputEl.value;
     var userScore = secondsLeft;
 
+    getHighScores();
+
     highScores.push({name: userInput, score: userScore});
 
     localStorage.setItem("highscore", JSON.stringify(highScores));
+    window.location.replace("./highscores.html")
+
 });
 
 var secondsLeft = 30;
@@ -165,29 +175,20 @@ var secondsLeft = 30;
 
 //     }, 1000)
 // }
+var startTimer = function () {
 
-var startTime = setInterval(function() {
-    secondsLeft--;
-    timerEl.textContent = secondsLeft;
-
-    if (secondsLeft <= 0) {
-        clearInterval(startTime);
-        enterScore();
-    }  
-}, 1000);
-
-// var startTimer = setInterval(function() {
-//         secondsLeft--;
-//         timerEl.textContent = secondsLeft;
-
-//         if (secondsLeft === 0) {
-//             clearInterval(startTimer);
-//             enterScore();
-//         }
-        
+    var startTime = setInterval(function() {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft;
+    
+        if (secondsLeft <= 0) {
+            clearInterval(startTime);
+            enterScore();
+        }  
+    }, 1000);
+}
 
 
-//     }, 1000);
 
 
 

@@ -24,7 +24,7 @@ var secondsLeft = 30;
 
 var highScores = [];
 
-//randomize the question
+
 var setNextQuestion = function() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);

@@ -61,3 +61,17 @@ button {
 .hide2 {
     display: none;
 }
+
+table {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+tr {
+    margin: 5px;
+}
+
+td {
+    margin: 5px;
+}

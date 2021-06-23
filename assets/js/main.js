@@ -12,13 +12,16 @@ var enterScoreEL = document.querySelector(".score");
 var finalScoreEL = document.querySelector(".final-score");
 
 var startQuizbtn2 = document.querySelector("#start-quiz2");
+var submitBtn = document.querySelector(".submit");
+var nameInputEl = document.querySelector(".name");
+
 
 var shuffledQuestions, currentQuestionIndex
 
 
 
 startQuizbtn.addEventListener('click', function() {
-        
+
         startTime;
         startEl.classList.add('hide');
         shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
@@ -123,14 +126,30 @@ function enterScore () {
     questionContainerEl.classList.add("hide");
     enterScoreEL.classList.remove("hide2");
     clearInterval(window.startTime);
-    finalScoreEL.textContent = secondsLeft;
-    
 
+    if (secondsLeft < 0) {
+        secondsLeft = 0
+    }
+    finalScoreEL.textContent = "Your final score is " + secondsLeft;
+    
 }
 
+var highScores = [
 
+];
+
+submitBtn.addEventListener("click", ()=> {
+
+    var userInput = nameInputEl.value;
+    var userScore = secondsLeft;
+
+    highScores.push({name: userInput, score: userScore});
+
+    localStorage.setItem("highscore", JSON.stringify(highScores));
+});
 
 var secondsLeft = 30;
+
 
 // var startTimer = function () {
 

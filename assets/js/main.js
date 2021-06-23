@@ -30,6 +30,13 @@ var setNextQuestion = function() {
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+function resetState () {
+    while (answerButtonsEl.firstChild) {
+        answerButtonsEl.removeChild(answerButtonsEl.firstChild);
+    }
+}
+
+
 function nextQuestion () {
     currentQuestionIndex++;
     setNextQuestion();
@@ -54,11 +61,6 @@ function showQuestion(questionArray) {
     
 };
 
-function resetState () {
-    while (answerButtonsEl.firstChild) {
-        answerButtonsEl.removeChild(answerButtonsEl.firstChild);
-    }
-}
 
 
 

@@ -4,6 +4,7 @@
 
 }
 
+/* CSS for index.html*/
 nav {
     display: flex;
     flex-direction: column wrap;
@@ -73,6 +74,18 @@ button {
     display: none;
 }
 
+
+input {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.submit {
+    background-color: var(--purple);
+}
+
+/* CSS code for highscore.html*/
 .hide2 {
     display: none;
 }
@@ -91,16 +104,5 @@ table div:nth-child(odd) {
     background-color: var(--lightPurple);
 }
 
-tr {
-    display: block;
-}
 
-input {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
 
-.submit {
-    background-color: var(--purple);
-}

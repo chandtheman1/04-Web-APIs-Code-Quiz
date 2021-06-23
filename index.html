@@ -9,19 +9,19 @@
 </head>
 
 <body>
-
+    <!--Navigation bar with an A tag and div that displays the timer-->
     <nav>
         <a href="./highscores.html">View Highscores</a>
         <div>Time: <span class="timer">30</span></div>
     </nav>
-        <!-- <button id="start-quiz2">Start Quiz</button> -->
     <main class="main">
+        <!-- template for the starting screen-->
         <div class="start">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
             <button id="start-quiz">Start Quiz</button>
         </div>  
-        <!-- <button id="start-quiz2">Start Quiz</button> -->
+        <!--template for question and answers to appear -->
         <div id="question-container" class="hide">
             <div id="question"> Question</div>
             <div id="answer-buttons" class="btn-grid">
@@ -31,7 +31,7 @@
                 <button class="btn">Answer 4</button>
             </div>
         </div>
-
+        <!--template for ending screen-->
         <div class="score hide2">
             <h2>All done!</h2>
             <p class="final-score"></p>
@@ -40,7 +40,7 @@
         </div>
 
     </main>
-    
+    <!-- index.html pulls logic from main.js-->
     <script src="./assets/js/main.js"></script>
 
 

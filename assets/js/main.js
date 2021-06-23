@@ -11,25 +11,19 @@ var timerEl = document.querySelector(".timer");
 var enterScoreEL = document.querySelector(".score");
 var finalScoreEL = document.querySelector(".final-score");
 
-var startQuizbtn2 = document.querySelector("#start-quiz2");
+
 var submitBtn = document.querySelector(".submit");
 var nameInputEl = document.querySelector(".name");
 
 
 var shuffledQuestions, currentQuestionIndex
 
+var startTime;
 
+var secondsLeft = 30;
 
+var highScores = [];
 
-
-
-// startQuizbtn2.addEventListener('click', function() { reduceTimer()});
-
-
-// var reduceTimer = function () {
-//     timerEl.textContent = secondsLeft - 10;
-
-// }
 
 var setNextQuestion = function() {
     resetState();
@@ -88,7 +82,7 @@ function selectAnswer (e) {
             secondsLeft = 0;
             timerEl.innerHTML = secondsLeft;
         } else {
-            secondsLeft -= 5;
+            secondsLeft -= 10;
             timerEl.innerHTML = secondsLeft;
         }
          
@@ -97,12 +91,11 @@ function selectAnswer (e) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         setTimeout(nextQuestion, 500);
     } else {
-        enterScore();
+        setTimeout(enterScore(), 500);
         
     }
     
 };
-
 
 
 function enterScore () {
@@ -118,10 +111,6 @@ function enterScore () {
     
 }
 
-var startTime;
-
-var secondsLeft = 30;
-
 
 var startTimer = function () {
 
@@ -134,47 +123,23 @@ var startTimer = function () {
              enterScore();
          }  
  
- 
      }, 1000)
  }
  
 
-
-// startTime = setInterval(function() {
-//     secondsLeft--;
-//     timerEl.textContent = secondsLeft;
-    
-//     if (secondsLeft <= 0) {
-//         clearInterval(startTime);
-//         enterScore();
-//     }  
-// }, 1000);
-
-
-
-
-
 startQuizbtn.addEventListener('click', function() {
-
-  
 
     startTimer();
     startEl.classList.add('hide');
     shuffledQuestions = questionArray.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     questionContainerEl.classList.remove('hide');
-
-    
     setNextQuestion();
-
-
+    return
 }
 );
 
 
-
-
-var highScores = [];
 
 function getHighScores () {
     var getPastScores = localStorage.getItem("highscore");
@@ -184,6 +149,7 @@ function getHighScores () {
     } else {
         highScores = JSON.parse(localStorage.getItem("highscore"));
     };
+
 };
 
 
@@ -200,39 +166,45 @@ submitBtn.addEventListener("click", function () {
     localStorage.setItem("highscore", JSON.stringify(highScores));
     window.location.replace("./highscores.html")
 
+
 });
+
+
+
+
+
 
 
 
 
 var questionArray = [
     {
-        question: "what is 2 + 2",
+        question: "String Values must be enclosed within ______ when being assigned to variables.",
         answers: [
-            { text: "4", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
+            { text: "quotes", correct: true },
+            { text: "commas", correct: false },
+            { text: "curly brackets", correct: false },
+            { text: "parentheses", correct: false },
         ]
     },
 
     {
-        question: "what is 4 + 4",
+        question: "Commonly used data types DO NOT include:",
         answers: [
-            { text: "8", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
+            { text: "strings", correct: false },
+            { text: "booleans", correct: false },
+            { text: "alerts", correct: true },
+            { text: "numbers", correct: false },
         ]
     },
 
     {
-        question: "what is 5 + 5",
+        question: "The condition in an if / else statement is enclosed within _____.",
         answers: [
-            { text: "10", correct: true },
-            { text: "22", correct: false },
-            { text: "33", correct: false },
-            { text: "44", correct: false },
+            { text: "quotes", correct: false },
+            { text: "curly brackets", correct: false },
+            { text: "parentheses", correct: true },
+            { text: "square brackets", correct: false },
         ]
     },
 ];

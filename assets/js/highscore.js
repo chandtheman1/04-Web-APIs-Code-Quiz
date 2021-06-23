@@ -4,15 +4,18 @@ var highScoreTable = JSON.parse(localStorage.getItem("highscore"));
 var goBackBtn = document.querySelector(".go-back");
 var clearHighScoresEl = document.querySelector(".clear-highscores");
 
-for (var i = 0; i < highScoreTable.length; i++) {
-    console.log(highScoreTable[i].name + " - " + highScoreTable[i].score);
-    var trTag = document.createElement("tr");
+
+var newHighScoreTable = highScoreTable.sort((a, b) => {
+    return b.score - a.score;
+});
+
+for (var i = 0; i < newHighScoreTable.length; i++) {
+    var divTag = document.createElement("div");
     var tdTag = document.createElement("td");
 
-    tableEl.appendChild(trTag);
-    trTag.appendChild(tdTag);
+    tableEl.appendChild(divTag);
 
-    tdTag.textContent = i + 1 + ". " + highScoreTable[i].name + " - " + highScoreTable[i].score;
+    divTag.textContent = i + 1 + ". " + newHighScoreTable[i].name + " - " + newHighScoreTable[i].score;
 
 };
 
@@ -25,3 +28,7 @@ clearHighScoresEl.addEventListener("click", function () {
     localStorage.setItem("highscore", JSON.stringify(highScores));
     location.reload();
 });
+
+
+
+

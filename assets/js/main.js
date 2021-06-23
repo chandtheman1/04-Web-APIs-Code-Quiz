@@ -24,12 +24,13 @@ var secondsLeft = 30;
 
 var highScores = [];
 
-
+//randomize the question
 var setNextQuestion = function() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+//removes the default question and answer template from the index.html
 function resetState () {
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
@@ -42,6 +43,7 @@ function nextQuestion () {
     setNextQuestion();
 }
 
+// display the question and assigns buttons to the answers 
 
 function showQuestion(questionArray) {
     questionEl.innerText = questionArray.question;
@@ -62,7 +64,7 @@ function showQuestion(questionArray) {
 };
 
 
-
+// Captures the click and determines if the answer does/does not have the dataset.correct = true
 
 
 function selectAnswer (e) {
@@ -75,7 +77,7 @@ function selectAnswer (e) {
         
 
     } else {
-        console.log("wrong");
+
         const wrongEL = document.createElement("wrong");
         wrongEL.textContent = "Wrong";
         answerButtonsEl.appendChild(wrongEL);
@@ -99,6 +101,7 @@ function selectAnswer (e) {
     
 };
 
+//Enter Score that starts the ending screen
 
 function enterScore () {
 
@@ -113,6 +116,7 @@ function enterScore () {
     
 }
 
+// Timer function 
 
 var startTimer = function () {
 
@@ -128,7 +132,7 @@ var startTimer = function () {
      }, 1000)
  }
  
-
+// Start button that initialises the timer and randomizing the question array
 startQuizbtn.addEventListener('click', function() {
 
     startTimer();
@@ -141,7 +145,7 @@ startQuizbtn.addEventListener('click', function() {
 }
 );
 
-
+// function prevents the localstorage being reset from var highScores = []; that was declared in the beginning
 
 function getHighScores () {
     var getPastScores = localStorage.getItem("highscore");
@@ -154,7 +158,7 @@ function getHighScores () {
 
 };
 
-
+// function that stores scores into LocalStorage 
 
 submitBtn.addEventListener("click", function () {
 
@@ -168,15 +172,10 @@ submitBtn.addEventListener("click", function () {
     localStorage.setItem("highscore", JSON.stringify(highScores));
     window.location.replace("./highscores.html")
 
-
 });
 
 
-
-
-
-
-
+// Question array so that the quiz can be expanded by simply adding more into the object
 
 
 var questionArray = [
